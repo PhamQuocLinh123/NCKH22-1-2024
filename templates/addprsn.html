@@ -1,0 +1,121 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    {% include "head.html" %}
+    <style>
+        body {
+            font-family: 'Arial', sans-serif;
+            background-color: #f8f9fa;
+            margin: 0;
+            padding: 0;
+        }
+
+        .container {
+            margin: auto;
+        }
+
+        h3 {
+            color: #007bff;
+            text-align: center;
+        }
+
+        form {
+            background-color: #ffffff;
+            padding: 20px;
+            border-radius: 10px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+        }
+
+        label {
+            font-weight: bold;
+            color: #555;
+        }
+
+        .form-group {
+            margin-bottom: 20px;
+        }
+
+        input.form-control,
+        select.form-control {
+            width: 100%;
+            padding: 10px;
+            box-sizing: border-box;
+            border: 1px solid #010915;
+            border-radius: 5px;
+            margin-top: 5px;
+        }
+
+        .btn-primary,
+        .btn-warning {
+            padding: 10px 20px;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            font-size: 16px;
+        }
+
+        .btn-primary {
+            background-color: #007bff;
+            color: #fff;
+        }
+
+        .btn-primary:hover {
+            background-color: #0056b3;
+        }
+
+        .btn-warning {
+            background-color: #ffc107;
+            color: #212529;
+        }
+
+        .btn-warning:hover {
+            background-color: #d39e00;
+        }
+    </style>
+</head>
+<body>
+
+{% include "navbar.html" %}
+
+<section class="container py-1">
+    <div class="row mt-5">
+        <div class="col-lg-8 offset-lg-2">
+            <h3>THÊM DỮ LIỆU KHUÔN MẶT</h3>
+            <hr>
+            <form class="form" method="post" action="/addprsn_submit">
+                <div class="form-group row">
+                    <label for="txtnbr" class="col-sm-4 col-form-label">Mã người dùng</label>
+                    <div class="col-sm-8">
+                        <input type="text" class="form-control" id="txtnbr" name="txtnbr" value="{{ newnbr }}" readonly>
+                    </div>
+                </div>
+                <div class="form-group row">
+                    <label for="txtname" class="col-sm-4 col-form-label">Tên người dùng</label>
+                    <div class="col-sm-8">
+                        <input type="text" class="form-control" id="txtname" name="txtname" required>
+                    </div>
+                </div>
+                <div class="form-group row">
+                    <label for="optskill" class="col-sm-4 col-form-label">Kỹ năng</label>
+                    <div class="col-sm-8">
+                        <select class="form-control" name="optskill" id="optskill">
+                            <option value="SOFTWARE">Phần mềm</option>
+                            <option value="HARDWARE">Phần cứng</option>
+                            <option value="ELECTRICAL">Mạng</option>
+                        </select>
+                    </div>
+                </div>
+                <div class="form-group row">
+                    <div class="col-sm-4"></div>
+                    <div class="col-sm-8" style="text-align: center">
+                        <input type="submit" class="btn btn-primary" value="Tiếp">
+                        <a href="/" class="btn btn-warning"><b>Quay lại</b></a>
+                    </div>
+                </div>
+            </form>
+        </div>
+    </div>
+</section>
+
+</body>
+</html>

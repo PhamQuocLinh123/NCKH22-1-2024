@@ -1,0 +1,79 @@
+<!-- navbar.html -->
+
+<nav class="navbar navbar-expand-lg py-2 navbar-dark bg-primary shadow-sm">
+    <div class="container">
+        <a href="#" class="navbar-brand">
+            <!-- Logo Image -->
+            <img src="{{ url_for('static', filename='img/ql5.png') }}" width="90" height="70" alt="" class="d-inline-block align-middle mr-2">
+            <!-- Logo Text -->
+        </a>
+        <div>
+            <ul class="navbar-nav ml-auto">
+                <li class="nav-item">
+                    <a href="/home" class="nav-link text-light btn-custom">DANH SÁCH</a>
+                </li>
+                <li class="nav-item">
+                    <a href="/fr_page" class="nav-link text-light btn-custom">NHẬN DIỆN</a>
+                </li>
+                <li class="nav-item">
+                    <a href="" class="nav-link text-light btn-custom">THỐNG KÊ</a>
+                </li>
+                <li class="nav-item">
+                    <a href="/user_list" class="nav-link text-light btn-custom">TÀI KHOẢN QUẢN TRỊ</a>
+                </li>
+            </ul>
+        </div>
+
+        {% if 'user_id' in session %}
+            <!-- Display greeting message with username if user is logged in -->
+            <span class="navbar-text text-light mr-3"><b>
+                Xin Chào, {{ session['username'] }}!</b>
+            </span>
+
+            <!-- Display logout button if user is logged in -->
+            <a href="{{ url_for('logout') }}" class="btn btn-outline-light btn-custom">Đăng Xuất</a>
+        {% endif %}
+
+        <!-- Additional buttons -->
+
+    </div>
+</nav>
+
+<!-- Add a <style> tag in your HTML file or link to an external CSS file -->
+<style>
+
+    /* Custom styling for navigation bar buttons */
+    .navbar-nav .nav-link {
+        margin: 0 15px;
+        font-size: 16px;
+        border-radius: 15px;
+        padding: 10px 15px;
+        transition: background-color 0.3s ease-in-out;
+        /*background-color: #093ff3 !* Change to your desired hover color *!*/
+    }
+
+    .navbar-nav .nav-link:hover {
+        background-color: #f10e66 /* Change to your desired hover color */
+    }
+
+    /* Style for the greeting message */
+    .navbar-text {
+        font-size: 16px;
+        margin-right: 15px;
+    }
+
+    /* Style for the logout button */
+    .btn-outline-light,
+    .btn-custom {
+        font-size: 16px;
+        border-radius: 5px;
+        padding: 10px 20px;
+        transition: background-color 0.3s ease-in-out, border-color 0.3s ease-in-out;
+    }
+
+    .btn-outline-light:hover,
+    .btn-custom:hover {
+        background-color: rgba(255, 0, 0, 0.7); /* Change to your desired hover color */
+        border-color: rgba(255, 0, 0, 0.9); /* Change to your desired hover border color */
+    }
+</style>

@@ -1,0 +1,118 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    {% include "head.html" %}
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Edit User</title>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/css/bootstrap.min.css">
+    <!-- Include your additional CSS styles if needed -->
+    <style>
+        body {
+            background-color: #f8f9fa; /* Background color for the body */
+            padding-top: 0px; /* Adjust the padding based on your navbar height */
+        }
+
+        .container {
+            max-width: 800px; /* Set the maximum width of the container */
+            margin: 0 auto; /* Center the container horizontally */
+        }
+
+        h1 {
+            text-align: center; /* Center the heading */
+            color: #010915; /* Set the heading color */
+        }
+
+        form {
+            background-color: #ffffff; /* Background color for the form */
+            padding: 20px; /* Add some padding to the form */
+            border: 1px solid #010915; /* Add a 1px solid border around the form */
+            border-radius: 8px; /* Add rounded corners to the form */
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1); /* Add a box shadow to the form */
+        }
+
+        label {
+            font-weight: bold; /* Make labels bold */
+            margin-bottom: 0.5rem; /* Add some space below labels */
+        }
+
+        input {
+            width: 100%; /* Make input fields take 100% width */
+            padding: 0.375rem 0.75rem; /* Add padding to input fields */
+            margin-bottom: 1rem; /* Add space below input fields */
+            display: inline-block;
+            vertical-align: middle;
+            border: 1px solid #ced4da; /* Add a 1px solid border to input fields */
+            border-radius: 0.25rem; /* Add rounded corners to input fields */
+            box-sizing: border-box;
+        }
+
+        button {
+            width: 100%; /* Make the button take 100% width */
+            padding: 0.75rem; /* Add padding to the button */
+            background-color: #007bff; /* Set the button background color */
+            color: #fff; /* Set the button text color */
+            border: 1px solid #007bff; /* Add a 1px solid border to the button */
+            border-radius: 0.25rem; /* Add rounded corners to the button */
+            cursor: pointer; /* Add a pointer cursor to the button */
+            box-sizing: border-box;
+        }
+
+        button:hover {
+            background-color: #0056b3; /* Change the background color on hover */
+        }
+    </style>
+</head>
+<body>
+
+{% include "navbar.html" %}
+
+<div class="container mt-5">
+    <h1 class="mb-4">CẬP NHẬT TÀI KHOẢN QUẢN TRỊ </h1>
+
+    <form method="post" action="{{ url_for('edit_user', user_id=user[0]) }}" class="needs-validation" novalidate>
+        <div class="form-group row">
+            <label for="new_username" class="col-sm-2 col-form-label"> Tên :</label>
+            <div class="col-sm-10">
+                <input type="text" id="new_username" name="new_username" value="{{ user[1] }}" class="form-control" required>
+                <div class="invalid-feedback">Please enter a new username.</div>
+            </div>
+        </div>
+        <div class="form-group row">
+            <label for="new_email" class="col-sm-2 col-form-label">Email:</label>
+            <div class="col-sm-10">
+                <input type="email" id="new_email" name="new_email" value="{{ user[3] }}" class="form-control" required>
+                <div class="invalid-feedback">Please enter a valid email address.</div>
+            </div>
+        </div>
+        <button type="submit" class="btn btn-primary">Save Changes</button>
+    </form>
+</div>
+
+<script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.10.2/dist/umd/popper.min.js"></script>
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/js/bootstrap.min.js"></script>
+
+<script>
+    // Bootstrap validation script
+    (function () {
+        'use strict';
+
+        window.addEventListener('load', function () {
+            var forms = document.getElementsByClassName('needs-validation');
+
+            var validation = Array.prototype.filter.call(forms, function (form) {
+                form.addEventListener('submit', function (event) {
+                    if (form.checkValidity() === false) {
+                        event.preventDefault();
+                        event.stopPropagation();
+                    }
+                    form.classList.add('was-validated');
+                }, false);
+            });
+        }, false);
+    })();
+</script>
+
+</body>
+</html>

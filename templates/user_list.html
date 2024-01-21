@@ -1,0 +1,111 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    {% include "head.html" %}
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>User List</title>
+
+    <!-- Include jQuery -->
+    <script src="https://code.jquery.com/jquery-3.5.1.min.js"></script>
+
+    <!-- Include DataTables CSS -->
+    <link href="https://cdn.datatables.net/v/dt/dt-1.13.8/datatables.min.css" rel="stylesheet">
+
+    <!-- Include DataTables JS -->
+    <script src="https://cdn.datatables.net/v/dt/dt-1.13.8/datatables.min.js"></script>
+
+    <!-- Include DataTables Buttons extension CSS -->
+    <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/buttons/2.1.0/css/buttons.dataTables.min.css">
+
+    <!-- Include DataTables Buttons extension JS -->
+    <script type="text/javascript" charset="utf8" src="https://cdn.datatables.net/buttons/2.1.0/js/dataTables.buttons.min.js"></script>
+    <script type="text/javascript" charset="utf8" src="https://cdn.datatables.net/buttons/2.1.0/js/buttons.html5.min.js"></script>
+
+    <style>
+        .wider-container {
+            max-width: 1400px;
+            margin-left: auto;
+            margin-right: auto;
+        }
+
+        .table-bordered {
+            border: 1px solid #e00000;
+            border-collapse: collapse;
+        }
+    </style>
+
+    <script type="text/javascript">
+        $(document).ready(function () {
+            var table = $('#userTable').DataTable({
+                searching: true,
+                paging: true,
+                buttons: [
+                    'excel' // Add an Excel export button
+                ]
+            });
+
+            $('#userTable tbody').on('click', 'button.edit-btn', function () {
+                var data = table.row($(this).parents('tr')).data();
+                window.location.href = '/edit_user/' + data[0];
+            });
+
+            $('#userTable tbody').on('click', 'button.delete-btn', function () {
+                var data = table.row($(this).parents('tr')).data();
+                var userId = data[0];
+
+                // Display a confirmation dialog
+                var isConfirmed = confirm('Bạn có chắc chắn muốn xóa tài khoản này không?');
+
+                if (isConfirmed) {
+                    // If confirmed, redirect to the delete_user route
+                    window.location.href = '/delete_user/' + userId;
+                }
+            });
+        });
+    </script>
+</head>
+
+<body>
+
+{% include "navbar.html" %}
+<br>
+<div class="wider-container">
+    <h1 style="text-align: center">TÀI KHOẢN QUẢN TRỊ</h1>
+
+    {% if users %}
+        <table id="userTable" class="display table-bordered">
+            <thead>
+                <tr>
+                    <th>User ID</th>
+                    <th>Username</th>
+                    <th>Email</th>
+                    <th>Created At</th>
+                    <th>Action</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for user in users %}
+                    <tr>
+                        <td>{{ user[0] }}</td>
+                        <td>{{ user[1] }}</td>
+                        <td>{{ user[3] }}</td>
+                        <td>{{ user[4] }}</td>
+                        <td>
+                            <button class="btn btn-success">Sửa</button>
+                            <button class="btn btn-success"><a href="/change_password" style="color: white" >Đổi mật khẩu </a></button>
+                            <!-- Add this button wherever you want in your HTML -->
+                            <a href="{{ url_for('export_excel') }}" class="btn btn-success"> Xuất File Excel</a>
+
+                        </td>
+                    </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+    {% else %}
+        <p>No users found.</p>
+    {% endif %}
+</div>
+
+</body>
+</html>

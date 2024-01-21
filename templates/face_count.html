@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Face Count</title>
+</head>
+<body>
+    <h1>Face Count</h1>
+    <p>Number of Faces Detected: {{ face_count }}</p>
+
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <script>
+        $(document).ready(function () {
+            function updateFaceCount() {
+                $.ajax({
+                    url: "/count_faces",  // Create a new route to count faces
+                    type: "GET",
+                    dataType: "json",
+                    success: function (data) {
+                        $("#face_count").text("Number of Faces Detected: " + data.face_count);
+                    },
+                    error: function (error) {
+                        console.log(error);
+                    }
+                });
+            }
+
+            // Update the face count every 2 seconds (you can adjust the interval)
+            setInterval(updateFaceCount, 2000);
+        });
+    </script>
+</body>
+</html>
